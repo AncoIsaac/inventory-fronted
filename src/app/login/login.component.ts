@@ -36,7 +36,6 @@ export class LoginComponent {
     }
 
     const { email, password } = this.loginForm.value;
-    console.log(email, password, 'contra');
     
     this.autSerivce.login({email, password}).subscribe({
       next: (res) => {
