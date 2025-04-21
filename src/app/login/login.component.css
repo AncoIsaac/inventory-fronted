@@ -1,12 +1,18 @@
 /* BLOCK */
 .login {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f7fafc;
 }
 
 /* ELEMENT */
 .login__container {
+  width: 100%;
   max-width: 400px;
-  margin: 50px auto;
+  padding: 2rem;
   padding: 2rem;
   background: #ffffff;
   border-radius: 10px;
@@ -48,14 +54,6 @@
   border-radius: 6px;
   font-size: 1rem;
   transition: all 0.3s ease;
-}
-
-.login__input--email {
-  /* Estilos específicos para email si es necesario */
-}
-
-.login__input--password {
-  /* Estilos específicos para password */
 }
 
 .login__input:focus {
