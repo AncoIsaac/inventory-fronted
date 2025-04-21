@@ -1,1 +1,50 @@
-<p>login works!</p>
+<div class="login">
+  <section class="login__container">
+    <form class="login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h1 class="login__title">Inicio de sesión</h1>
+      
+      <div class="login__field">
+        <label class="login__label">Email <span class="login__required">*</span></label>
+        <input
+          type="text"
+          id="email"
+          formControlName="email"
+          class="login__input login__input--email"
+          [class.login__input--invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        
+        <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched"
+          class="login__error">
+          El email es requerido
+        </div>
+        <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched"
+          class="login__error">
+          Por favor ingresa un email válido
+        </div>
+      </div>
+      
+      <div class="login__field">
+        <label class="login__label">Password <span class="login__required">*</span></label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="••••••••"
+          class="login__input login__input--password"
+          [class.login__input--invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        
+        <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched"
+          class="login__error">
+          La contraseña es requerida
+        </div>
+        <div *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched"
+          class="login__error">
+          La contraseña debe tener al menos 4 caracteres
+        </div>
+      </div>
+      
+      <button type="submit" class="login__button">
+        Ingresar
+      </button>
+    </form>
+  </section>
+</div>

@@ -8,17 +8,16 @@ import { ILogin } from '../../interface/login/login.interface';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http:localhost:3000';
+  private apiUrl = 'http://localhost:8080/api';
   private isAuthenticated: boolean = false;
 
   constructor(private router: Router, private http: HttpClient) {}
 
   login(data: ILogin) {
-    return this.http.post(`${this.apiUrl}/login`, { email: data.email, password: data.password }).pipe(
+    return this.http.post(`${this.apiUrl}/auth/signIn`, { email: data.email, password: data.password }).pipe(
       tap((response) => {
-        console.log(response);
         this.isAuthenticated = true;
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/hola']);
       })
     );
   }
