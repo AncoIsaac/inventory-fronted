@@ -19,7 +19,6 @@ export class LoginComponent {
 
   constructor(
     private autSerivce: AuthService,
-    private router: Router,
     private fb: FormBuilder,
   ) {
     this.loginForm = this.fb.group({
@@ -38,10 +37,6 @@ export class LoginComponent {
     const { email, password } = this.loginForm.value;
     
     this.autSerivce.login({email, password}).subscribe({
-      next: (res) => {
-        console.log(res, 'res');
-        this.isloading = true;
-      },
       error: (err) => {
         console.log(err, 'err');
         

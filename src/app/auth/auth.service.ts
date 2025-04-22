@@ -14,12 +14,18 @@ export class AuthService {
   constructor(private router: Router, private http: HttpClient) {}
 
   login(data: ILogin) {
-    return this.http.post(`${this.apiUrl}/auth/signIn`, { email: data.email, password: data.password }).pipe(
-      tap((response) => {
-        this.isAuthenticated = true;
-        this.router.navigate(['/hola']);
+    return this.http
+      .post(`${this.apiUrl}/auth/signIn`, {
+        email: data.email,
+        password: data.password,
       })
-    );
+      .pipe(
+        tap((response) => {
+          localStorage.setItem('token', (response as any).data.token);
+          this.isAuthenticated = true;
+          this.router.navigate(['/hola']);
+        })
+      );
   }
 
   logout() {
