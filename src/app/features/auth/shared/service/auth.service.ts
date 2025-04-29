@@ -26,7 +26,7 @@ export class AuthService {
           
           localStorage.setItem('token', response.data.token);
           this.isAuthenticated = true;
-          this.router.navigate(['/hola']);
+          this.router.navigate(['/home']);
         })
       );
   }

@@ -1,0 +1,44 @@
+<nav class="navbar">
+    <div class="navbar__brand">MiApp</div>
+    <ul class="navbar__menu">
+      <li class="navbar__item">
+        <div class="navbar__notifications" #notificationsDropdown>
+          <button
+            (click)="toggleNotifications()"
+            class="navbar__notifications-btn"
+          >
+            <lucide-icon [name]="bellIcon" class=""></lucide-icon>
+            @if (notifications.length > 0) {
+            <span class="navbar__notifications-badge">
+              {{ notifications.length }}
+            </span>
+            }
+          </button>
+          @if (showNotifications) {
+          <div class="navbar__notifications-dropdown">
+            <div class="navbar__notifications-header">
+              <h3 class="navbar__notifications-title">Notificaciones ({{ notifications.length }})</h3>
+            </div>
+            <ul class="navbar__notifications-list">
+              @for (notification of notifications; track notification.id) {
+              <li class="navbar__notifications-item">
+                <p class="navbar__notifications-text">{{ notification.text }}</p>
+                <small class="navbar__notifications-time">{{ notification.time }}</small>
+              </li>
+              }
+            </ul>
+            <div class="navbar__notifications-footer">
+              <button class="navbar__notifications-action">Ver todas</button>
+            </div>
+          </div>
+          }
+        </div>
+      </li>
+      <li class="navbar__item">
+        <button class="navbar__logout">
+          <lucide-icon [name]="logOutIcon" class=""></lucide-icon>
+          <span class="navbar__logout-text">Cerrar sesión</span>
+        </button>
+      </li>
+    </ul>
+  </nav>

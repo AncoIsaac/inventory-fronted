@@ -9,10 +9,10 @@ export const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   {
-    path: 'hola',
+    path: 'home',
     loadComponent: () =>
-      import('./features/dashboard/dashboard.component').then(
-        (m) => m.DashboardComponent
+      import('./features/home-page/home-page.component').then(
+        (m) => m.HomePageComponent
       ),
     canActivate: [authGuard],
   },
