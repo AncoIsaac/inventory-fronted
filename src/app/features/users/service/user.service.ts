@@ -20,13 +20,6 @@ export class UserService {
     });
   }
 
-  get refresh$() {
-    return this.refreshNeeded.asObservable();
-  }
-
-  notifyDataChange() {
-    this.refreshNeeded.next();
-  }
 
   getUsers(params: {
     page: number;

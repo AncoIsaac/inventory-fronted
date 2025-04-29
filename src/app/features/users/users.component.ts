@@ -1,5 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { TableComponent } from "../../core/components/table/table.component";
+import { TableComponent } from '../../core/components/table/table.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './service/user.service';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
@@ -11,7 +11,7 @@ import { UserPagination } from './interface/IPaginationUser';
   standalone: true,
   imports: [TableComponent, CommonModule, ReactiveFormsModule],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.css'
+  styleUrl: './users.component.css',
 })
 export class UsersComponent implements OnInit {
   users = signal<UserPagination[]>([]);
@@ -24,7 +24,11 @@ export class UsersComponent implements OnInit {
     { field: 'userName', header: 'Nombre' },
     { field: 'email', header: 'Correo' },
     { field: 'role', header: 'Role' },
-    { field: 'isActive', header: 'Estado', format: (value: boolean) => value ? 'Activo' : 'Inactivo' },
+    {
+      field: 'isActive',
+      header: 'Estado',
+      format: (value: boolean) => (value ? 'Activo' : 'Inactivo'),
+    },
   ];
 
   pageSize: number = 10;
@@ -33,9 +37,7 @@ export class UsersComponent implements OnInit {
   private cachedData: Map<string, any> = new Map();
   private cacheTimeout: number = 5 * 60 * 1000;
 
-  constructor(private userService: UserService) {
-
-  }
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.loadUsers();
@@ -43,14 +45,13 @@ export class UsersComponent implements OnInit {
   }
 
   setupSearch() {
-    this.searchControl.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged()
-    ).subscribe(value => {
-      this.currentPage.set(1);
-      this.clearCache();
-      this.loadUsers();
-    });
+    this.searchControl.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((value) => {
+        this.currentPage.set(1);
+        this.clearCache();
+        this.loadUsers();
+      });
   }
 
   private getCacheKey(): string {
@@ -99,7 +100,7 @@ export class UsersComponent implements OnInit {
     const params = {
       page: this.currentPage(),
       size: this.pageSize,
-      search: this.searchControl.value || ''
+      search: this.searchControl.value || '',
     };
 
     this.userService.getUsers(params).subscribe({
@@ -113,7 +114,7 @@ export class UsersComponent implements OnInit {
       error: (error) => {
         console.error('Error cargando usuarios:', error);
         this.loading.set(false);
-      }
+      },
     });
   }
 
@@ -145,6 +146,6 @@ export class UsersComponent implements OnInit {
 
   handleDelete(user: any) {
     console.log('Eliminar usuario:', user);
-    this.clearCache();// Notificar cambios después de eliminar
+    this.clearCache(); // Notificar cambios después de eliminar
   }
 }
