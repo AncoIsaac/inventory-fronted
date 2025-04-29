@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { authGuard } from './auth/auth.guard';
+import { LoginComponent } from './features/auth/login/login.component';
+import { authGuard } from './features/auth/shared/guard/auth.guard';
 export const routes: Routes = [
   {
     path: '',
@@ -11,7 +11,7 @@ export const routes: Routes = [
   {
     path: 'hola',
     loadComponent: () =>
-      import('./dashboard/dashboard.component').then(
+      import('./features/dashboard/dashboard.component').then(
         (m) => m.DashboardComponent
       ),
     canActivate: [authGuard],

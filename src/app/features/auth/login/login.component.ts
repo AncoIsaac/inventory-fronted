@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../auth/auth.service';
-import { Router } from '@angular/router';
+import { AuthService } from '../shared/service/auth.service';
+import { IError } from './interface/IError';
 
 @Component({
   selector: 'app-login',
@@ -28,8 +28,6 @@ export class LoginComponent {
   }
   onSubmit() {
     if (!this.loginForm.valid) {
-      console.log('Formulario válido');
-      
      this.loginForm.markAllAsTouched();
      return;
     }
@@ -37,9 +35,7 @@ export class LoginComponent {
     const { email, password } = this.loginForm.value;
     
     this.autSerivce.login({email, password}).subscribe({
-      error: (err) => {
-        console.log(err, 'err');
-        
+      error: (err: IError) => {
         this.isloading = false;
         this.errorMessage = err.error.message;
       },
