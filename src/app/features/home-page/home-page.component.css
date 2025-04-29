@@ -1,5 +1,8 @@
-.page{
-    height: 94.65vh;
-    background: #dcdde0;
-    padding: .4rem .8rem;
+.cont {
+  padding-left: 3.1rem;
+}
+
+.page {
+    padding: 1rem;
+  color: white;
 }

@@ -13,7 +13,15 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/home-page/home-page.component').then(
         (m) => m.HomePageComponent
-      ),
+      ), children: [
+        {
+          path: '',
+          loadComponent: () =>
+            import('./features/dashboard/dashboard.component').then(
+              (m) => m.DashboardComponent
+            ),
+        },
+      ],
     canActivate: [authGuard],
   },
 ];
