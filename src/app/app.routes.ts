@@ -21,6 +21,13 @@ export const routes: Routes = [
               (m) => m.DashboardComponent
             ),
         },
+        {
+          path: 'createUser',
+          loadComponent: () =>
+            import('./features/users/users.component').then(
+              (m) => m.UsersComponent
+            ),
+        }
       ],
     canActivate: [authGuard],
   },

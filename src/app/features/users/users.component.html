@@ -1,0 +1,47 @@
+<div class="users">
+  <div class="users__header">
+    <h2 class="users__title">Gestión de Usuarios</h2>
+    <div class="users__actions">
+        <button class="users__refresh-btn" (click)="refreshData()">
+            Actualizar
+          </button>
+      <div class="users__search">
+        <input
+          type="text"
+          [formControl]="searchControl"
+          placeholder="Buscar usuarios..."
+          class="users__search-input"
+        />
+      </div>
+    </div>
+  </div>
+
+  <app-table
+    [columns]="columns"
+    [data]="users()"
+    [loading]="loading()"
+    (onEdit)="handleEdit($event)"
+    (onDelete)="handleDelete($event)"
+  >
+  </app-table>
+
+  <div class="users__pagination">
+    <button
+      [disabled]="currentPage() === 1"
+      (click)="onPageChange(currentPage() - 1)"
+      class="users__pagination-btn"
+    >
+      Anterior
+    </button>
+    <span class="users__pagination-info">
+      Página {{ currentPage() }} de {{ totalPages() }}
+    </span>
+    <button
+      [disabled]="currentPage() >= totalPages()"
+      (click)="onPageChange(currentPage() + 1)"
+      class="users__pagination-btn"
+    >
+      Siguiente
+    </button>
+  </div>
+</div>

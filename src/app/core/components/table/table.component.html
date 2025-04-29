@@ -1,0 +1,51 @@
+<div class="data-table">
+  <div class="data-table__container">
+    <table class="data-table__table">
+      <thead>
+        <tr>
+          <th class="data-table__header" *ngFor="let column of columns">
+            {{ column.header }}
+          </th>
+          <th class="data-table__header">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="loading" class="data-table__row--loading">
+          <td [colSpan]="columns.length + 1" class="data-table__cell">
+            <div class="data-table__spinner">Cargando...</div>
+          </td>
+        </tr>
+        <tr *ngFor="let item of data">
+          <td class="data-table__cell" *ngFor="let column of columns">
+            {{
+              column.format
+                ? column.format(item[column.field])
+                : item[column.field]
+            }}
+          </td>
+          <td class="data-table__cell">
+            <div class="data-table__actions">
+              <button
+                class="data-table__button data-table__button--edit"
+                (click)="onEdit.emit(item)"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+              <button
+                class="data-table__button data-table__button--delete"
+                (click)="onDelete.emit(item)"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="!loading && data.length === 0">
+          <td [colSpan]="columns.length + 1" class="data-table__cell">
+            <div class="data-table__message">No hay datos disponibles</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

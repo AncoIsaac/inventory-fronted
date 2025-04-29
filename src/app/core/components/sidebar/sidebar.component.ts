@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { IMenuItem } from './interface/IMenuItem';
-import { FileText, Home, LucideAngularModule, Menu, PlayCircle } from 'lucide-angular';
+import { FileText, Home, LucideAngularModule, Menu, PlayCircle, User } from 'lucide-angular';
 import { Router } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
 
@@ -19,9 +19,7 @@ export class SidebarComponent {
 
   menuItems: IMenuItem[] = [
     { icon: Home, label: 'Inicio', route: '/home' },
-    { icon: PlayCircle, label: 'chess', route: '/home/chess' },
-    { icon: FileText, label: 'test', route: '/home/test' },
-    // { icon: Settings, label: 'Configuración', route: '/settings' },
+    { icon: User, label: 'Crear usuarios', route: '/home/createUser' },
   ];
 
   constructor(private router: Router) {}
